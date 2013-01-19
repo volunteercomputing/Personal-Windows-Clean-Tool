@@ -23,7 +23,7 @@
 !include					"x64.nsh"
 !include					"Sections.nsh"
 InstallDir					"c:\"
-OutFile						"CleanV2RC_STD.exe"
+OutFile						"CleanV2RC_STD.exe"  
 Caption 					"Windows 系统清理工具 RC测试版"
 Name 						"Windows 系统清理工具 RC测试版"
 RequestExecutionLevel 		admin
