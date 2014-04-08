@@ -26,13 +26,13 @@ InstallDir					"c:\"
 OutFile						"CleanV2RC_STD.exe"  
 Caption 					"Windows 系统清理工具 RC测试版"
 Name 						"Windows 系统清理工具 RC测试版"
-RequestExecutionLevel 		admin
+RequestExecutionLevel 				admin
 XPStyle						on
 WindowIcon					off
-ShowInstDetails				show
-SetCompressor /SOLID		lzma
-SetCompressorDictSize		64
-SetDatablockOptimize		on
+ShowInstDetails					show
+SetCompressor /SOLID				lzma
+SetCompressorDictSize				64
+SetDatablockOptimize				on
 
 Function GetWindowsVersion
    Push $R0
@@ -94,7 +94,7 @@ FunctionEnd
   !define MUI_WELCOMEFINISHPAGE_BITMAP_NOSTRETCH
   !define MUI_HEADERIMAGE
   !define MUI_HEADERIMAGE_BITMAP "R\B.bmp" 
-/*  !define MUI_COMPONENTSPAGE_SMALLDESC*/
+/*!define MUI_COMPONENTSPAGE_SMALLDESC */
   !define MUI_WELCOMEPAGE_TEXT "使用此软件可快速安全删除系统中的各类系统垃圾。\r\n\r\n此软件简单易用 。拥有多方位的清理方式，特别当今适合各行各业的电脑工作人员，可用于当今主流的各类桌面版 Windows 32 或 64 位操作系统。\r\n\r\n制作：周潇波 日期：2012年02月，祝大家新年快乐！\r\n\r\n注意：此版本为RC版，作者可允许您在大范围内公共使用，非常感谢您使用本软件！！"
   !insertmacro MUI_PAGE_WELCOME
   !insertmacro MUI_PAGE_COMPONENTS
@@ -140,15 +140,6 @@ FunctionEnd
   FunctionEnd
   
 /*Section ""  CLEAN
-
-SectionEnd
-
-Section ""  CLEAN
-
-SectionEnd
-
-Section ""  CLEAN
-
 SectionEnd*/
 
 SectionGroup "系统一般清理" NOR
@@ -158,40 +149,41 @@ Section "!基础删除" STANDARDCLEAN
   DetailPrint "好好清理，天天向上！......"
   SetDetailsPrint listonly
   Delete $TEMP\*.*
-  RMDir /r "$TEMP"
-  Delete $WINDIR\TEMP\*.*
-  Delete $APPDATA\Local\Temp\*.*																						/*以下项目在WIN7环境下加入，仅能供 Vista/7系统进行清理。*/
-  RMDir /r "$APPDATA\Local\Temp"																						/*这里是属于“用户临时文件”*/
-  RMDir /r "$WINDIR\TEMP"
-  SetOutPath "$WINDIR\TEMP"
-  Delete $WINDIR\system32\FNTCACHE.DAT																					/*Widnwos 字体缓存*/
-SectionEnd
+		RMDir /r "$TEMP"
+		Delete $WINDIR\TEMP\*.*
+  		Delete $APPDATA\Local\Temp\*.*																						/*以下项目在WIN7环境下加入，仅能供 Vista/7系统进行清理。*/
+  		RMDir /r "$APPDATA\Local\Temp"																						/*这里是属于“用户临时文件”*/
+  		RMDir /r "$WINDIR\TEMP"
+		SetOutPath "$WINDIR\TEMP"
+		Delete $WINDIR\system32\FNTCACHE.DAT																					/*Widnwos 字体缓存*/
+	SectionEnd
 SectionGroupEnd
 
 SectionGroup "系统高级清理" HIGHCLASS
-Section "!运行对话框历史记录"  RUNCLEAN
-  DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU"
-SectionEnd
-Section "!最近的打开的各类文件历史记录"  RECENTCLEAN
-  Delete $RECENT\*.*
-  RMDir /r "$RECENT"
-  Delete $APPDATA\Microsoft\Office\Recent\*.*
-  Delete $APPDATA\Microsoft\Word\*.wbk
-  DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs"
-  DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\OpenSavePidlMRU"
-  DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\OpenSaveMRU"
-  DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\LastVisitedPidlMRULegacy"
-  DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\LastVisitedPidlMRU"
-  DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\CIDSizeMRU"
-  DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\StreamMRU"
-  DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist"										/*以下几项在 WINXP 环境内加入*/
-  DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\TrayNotify"
-  DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Applets\Wordpad\Recent File List"
-  DeleteRegKey HKCU "Software\Microsoft\Windows\ShellNoRoam\MUICache"
-  DeleteRegKey HKCU "Software\Microsoft\Internet Explorer\TypedURLs"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.flac"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.mmf"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.exe"
+	Section "!运行对话框历史记录"  RUNCLEAN
+		 DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU"
+	SectionEnd
+
+	Section "!最近的打开的各类文件历史记录"  RECENTCLEAN
+		Delete $RECENT\*.*
+		RMDir /r "$RECENT"
+		Delete $APPDATA\Microsoft\Office\Recent\*.*
+		Delete $APPDATA\Microsoft\Word\*.wbk
+		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs"
+		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\OpenSavePidlMRU"
+		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\OpenSaveMRU"
+		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\LastVisitedPidlMRULegacy"
+  		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\LastVisitedPidlMRU"
+  		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\CIDSizeMRU"
+  		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\StreamMRU"
+		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist"										/*以下几项在 WINXP 环境内加入*/
+  		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\TrayNotify"
+  		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Applets\Wordpad\Recent File List"
+  		DeleteRegKey HKCU "Software\Microsoft\Windows\ShellNoRoam\MUICache"
+  		DeleteRegKey HKCU "Software\Microsoft\Internet Explorer\TypedURLs"
+		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.flac"
+		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.mmf"
+		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.exe"
     DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.rm"
     DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.rmvb"
     DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.dll"
