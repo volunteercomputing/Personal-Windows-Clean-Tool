@@ -1,154 +1,153 @@
-;制作						周潇波
-;日期						2012年01月
-!define						PRODUCT_NAME "Windows 系统清理工具 正式标准版"
-!define 					PRODUCT_VERSION "2.0.2012.62"
-!define 					PRODUCT_PUBLISHER "制作：周潇波"
-!define						PRODUCT_WEB_SITE "http://weibo.com/xiaobo58/"
-!define 					APPWEBSITE "http://weibo.com/xiaobo58/"
-!define 					MUI_ICON "E:\DisplayIcon.ICO"
-!define 					VERSION_MAJOR 2
-!define		 				VERSION_MINOR 0201262
-!define 					MUI_ABORTWARNING_TEXT "您是否要取消操作？？"
-!define						MUI_TEXT_COMPONENTS_TITLE "选择清理项目"
-!define						MUI_TEXT_COMPONENTS_SUBTITLE "请仔细选择您想要清理的项目，程序已经默认为您选择了几个常用的项目，您可以自行任意勾选。"
-!define						MUI_INNERTEXT_COMPONENTS_DESCRIPTION_TITLE "清理项目详细介绍"
-!define						MUI_INNERTEXT_COMPONENTS_DESCRIPTION_INFO "请将您的鼠标移至您想要清理的项目之上，您将会看到所清理项目的详细提示信息。"
-!define						MUI_TEXT_INSTALLING_TITLE "清理中，忙呢"
-!define 					MUI_TEXT_INSTALLING_SUBTITLE "正在为您清理您的系统，请稍等片刻...^_^..."
-!define						MUI_TEXT_FINISH_TITLE "您所选择的清理项已成功清理完毕"
-!define						MUI_TEXT_FINISH_SUBTITLE "OK!!清理好啦，您又有了一个干净的系统了！"
-!define						MUI_TEXT_ABORT_TITLE "您所选择的清理项目竟然没有成功清理？？"
-!define						MUI_TEXT_ABORT_SUBTITLE "哎呀，没有清理成功嘞，请下仔细检查问题，如果还有疑问请 @上海三五牌闹钟（SinaMicroBlog）：http://weibo.com/xiaobo58/."
-!include					"MUI.nsh"
-!include					"x64.nsh"
-!include					"Sections.nsh"
-InstallDir					"c:\"
-OutFile						"CleanV2RC_STD.exe"  
-Caption 					"Windows 系统清理工具 RC测试版"
-Name 						"Windows 系统清理工具 RC测试版"
-RequestExecutionLevel 				admin
-XPStyle						on
-WindowIcon					off
-ShowInstDetails					show
-SetCompressor /SOLID				lzma
-SetCompressorDictSize				64
-SetDatablockOptimize				on
+;制作	周潇波
+;日期	2012年01月
+!define					PRODUCT_NAME "Windows 系统清理工具 正式标准版"
+!define 				PRODUCT_VERSION "2.0.2012.62"
+!define 				PRODUCT_PUBLISHER "制作：周潇波"
+!define					PRODUCT_WEB_SITE "http://weibo.com/xiaobo58/"
+!define 				APPWEBSITE "http://weibo.com/xiaobo58/"
+!define 				MUI_ICON "E:\DisplayIcon.ICO"
+!define 				VERSION_MAJOR 2
+!define		 			VERSION_MINOR 0201262
+!define 				MUI_ABORTWARNING_TEXT "您是否要取消操作？？"
+!define					MUI_TEXT_COMPONENTS_TITLE "选择清理项目"
+!define					MUI_TEXT_COMPONENTS_SUBTITLE "请仔细选择您想要清理的项目，程序已经默认为您选择了几个常用的项目，您可以自行任意勾选。"
+!define					MUI_INNERTEXT_COMPONENTS_DESCRIPTION_TITLE "清理项目详细介绍"
+!define					MUI_INNERTEXT_COMPONENTS_DESCRIPTION_INFO "请将您的鼠标移至您想要清理的项目之上，您将会看到所清理项目的详细提示信息。"
+!define					MUI_TEXT_INSTALLING_TITLE "清理中，忙呢"
+!define 				MUI_TEXT_INSTALLING_SUBTITLE "正在为您清理您的系统，请稍等片刻...^_^..."
+!define					MUI_TEXT_FINISH_TITLE "您所选择的清理项已成功清理完毕"
+!define					MUI_TEXT_FINISH_SUBTITLE "OK!!清理好啦，您又有了一个干净的系统了！"
+!define					MUI_TEXT_ABORT_TITLE "您所选择的清理项目竟然没有成功清理？？"
+!define					MUI_TEXT_ABORT_SUBTITLE "哎呀，没有清理成功嘞，请下仔细检查问题，如果还有疑问请 @上海三五牌闹钟（SinaMicroBlog）：http://weibo.com/xiaobo58/."
+!include				"MUI.nsh"
+!include				"x64.nsh"
+!include				"Sections.nsh"
+InstallDir				"C:\"
+OutFile					"CleanV2RC_STD.exe"  
+Caption 				"Windows 系统清理工具 RC测试版"
+Name 					"Windows 系统清理工具 RC测试版"
+RequestExecutionLevel 			admin
+XPStyle					on
+WindowIcon				off
+ShowInstDetails				show
+SetCompressor /SOLID			lzma
+SetCompressorDictSize			64
+SetDatablockOptimize			on
 
-Function GetWindowsVersion
-   Push $R0
-   Push $R1
-   ClearErrors
-   ReadRegStr $R0 HKLM \
-   "SOFTWARE\Microsoft\Windows NT\CurrentVersion" CurrentVersion
-   IfErrors 0 lbl_winnt
-   ; If NOT NT SYSTEM,THEN
-   ReadRegStr $R0 HKLM \
-   "SOFTWARE\Microsoft\Windows\CurrentVersion" VersionNumber
-   StrCpy $R1 $R0 1
-   StrCmp $R1 '4' 0 lbl_error
-   StrCpy $R1 $R0 3
-   StrCmp $R1 '4.0' lbl_win32_95
-   StrCmp $R1 '4.9' lbl_win32_ME lbl_win32_98
-   lbl_win32_95:
-     StrCpy $R0 '95'
-   Goto lbl_done
-   lbl_win32_98:
-     StrCpy $R0 '98'
-   Goto lbl_done
-   lbl_win32_ME:
-     StrCpy $R0 'ME'
-   Goto lbl_done
-   lbl_winnt:
-   StrCpy $R1 $R0 1
-   StrCmp $R1 '3' lbl_winnt_x
-   StrCmp $R1 '4' lbl_winnt_x
-   StrCpy $R1 $R0 3
-   StrCmp $R1 '5.0' lbl_winnt_2000
-   StrCmp $R1 '5.1' lbl_winnt_XP
-   StrCmp $R1 '5.2' lbl_winnt_2003
-   StrCmp $R1 '6.0' lbl_winnt_vista lbl_error
-   lbl_winnt_x:
-   StrCpy $R0 "NT $R0" 6
-   Goto lbl_done
-   lbl_winnt_2000:
-   Strcpy $R0 '2000'
-   Goto lbl_done
-   lbl_winnt_XP:
-     Strcpy $R0 'XP'
-   Goto lbl_done
-   lbl_winnt_2003:
-     Strcpy $R0 '2003'
-   Goto lbl_done
-   lbl_winnt_vista:
-     Strcpy $R0 'Vista'
-   Goto lbl_done
-    lbl_error:
-     Strcpy $R0 ''
-   lbl_done:
-   Pop $R1
-   Exch $R0
-FunctionEnd
+	Function GetWindowsVersion
+		Push $R0
+   		Push $R1
+   		ClearErrors
+   		ReadRegStr $R0 HKLM \
+   		"SOFTWARE\Microsoft\Windows NT\CurrentVersion" CurrentVersion
+		IfErrors 0 lbl_winnt
+		; If NOT NT SYSTEM,THEN
+		ReadRegStr $R0 HKLM \
+   		"SOFTWARE\Microsoft\Windows\CurrentVersion" VersionNumber
+   		StrCpy $R1 $R0 1
+   		StrCmp $R1 '4' 0 lbl_error
+   		StrCpy $R1 $R0 3
+   		StrCmp $R1 '4.0' lbl_win32_95
+   		StrCmp $R1 '4.9' lbl_win32_ME lbl_win32_98
+   		lbl_win32_95:
+     		StrCpy $R0 '95'
+   		Goto lbl_done
+   		lbl_win32_98:
+     		StrCpy $R0 '98'
+   		Goto lbl_done
+   		lbl_win32_ME:
+     		StrCpy $R0 'ME'
+   		Goto lbl_done
+   		lbl_winnt:
+   		StrCpy $R1 $R0 1
+   		StrCmp $R1 '3' lbl_winnt_x
+   		StrCmp $R1 '4' lbl_winnt_x
+   		StrCpy $R1 $R0 3
+   		StrCmp $R1 '5.0' lbl_winnt_2000
+   		StrCmp $R1 '5.1' lbl_winnt_XP
+   		StrCmp $R1 '5.2' lbl_winnt_2003
+   		StrCmp $R1 '6.0' lbl_winnt_vista lbl_error
+		lbl_winnt_x:
+   		StrCpy $R0 "NT $R0" 6
+   		Goto lbl_done
+   		lbl_winnt_2000:
+   		Strcpy $R0 '2000'
+   		Goto lbl_done
+   		lbl_winnt_XP:
+     		Strcpy $R0 'XP'
+   		Goto lbl_done
+   		lbl_winnt_2003:
+     		Strcpy $R0 '2003'
+   		Goto lbl_done
+   		lbl_winnt_vista:
+     		Strcpy $R0 'Vista'
+		Goto lbl_done
+    		lbl_error:
+		Strcpy $R0 ''
+   		lbl_done:
+   		Pop $R1
+   		Exch $R0
+	FunctionEnd
 
-  !define MUI_ABORTWARNING
-  !define MUI_WELCOMEFINISHPAGE_BITMAP "R\A.bmp"
-  !define MUI_WELCOMEFINISHPAGE_BITMAP_NOSTRETCH
-  !define MUI_HEADERIMAGE
-  !define MUI_HEADERIMAGE_BITMAP "R\B.bmp" 
-/*!define MUI_COMPONENTSPAGE_SMALLDESC */
-  !define MUI_WELCOMEPAGE_TEXT "使用此软件可快速安全删除系统中的各类系统垃圾。\r\n\r\n此软件简单易用 。拥有多方位的清理方式，特别当今适合各行各业的电脑工作人员，可用于当今主流的各类桌面版 Windows 32 或 64 位操作系统。\r\n\r\n制作：周潇波 日期：2012年02月，祝大家新年快乐！\r\n\r\n注意：此版本为RC版，作者可允许您在大范围内公共使用，非常感谢您使用本软件！！"
-  !insertmacro MUI_PAGE_WELCOME
-  !insertmacro MUI_PAGE_COMPONENTS
-  !insertmacro MUI_PAGE_INSTFILES
-  !insertmacro MUI_LANGUAGE "SimpChinese"
-  VIProductVersion "2.0.2012.62"
-  VIAddVersionKey /LANG=${1033-English} "ProductName" "Windows 系统清理工具 2012龙年特别版 正式标准版"
-  VIAddVersionKey /LANG=${1033-English} "Comments" "制作：周潇波 2012年01月22日 星期日 农历2011年大年三十 18:00 (GMT+8) E－Mail:zhouxiaobo.500@163.com 祝大家楼年吉祥，幸福安康！"
-  VIAddVersionKey /LANG=${1033-English} "CompanyName" "周潇波"
-  VIAddVersionKey /LANG=${1033-English} "LegalTrademarks" "Windows 系统清理工具 正式标准版"
-  VIAddVersionKey /LANG=${1033-English} "LegalCopyright" "Copyright (C) 2009-2012 by 周潇波"
-  VIAddVersionKey /LANG=${1033-English} "FileDescription" "简单快速的系统清理工具，包含各类系统、软件清理、瘦身等功能。"
-  VIAddVersionKey /LANG=${1033-English} "FileVersion" "2.0.2012.62"
-  VIAddVersionKey /LANG=${1033-English} "Applies to" "Microsoft(R) Windows (R) 2000 Or Higher System."
-  VIAddVersionKey /LANG=${1033-English} "Build Date " "2012/01/22 Sun 18:00 PM (GMT+8)"
-  VIAddVersionKey /LANG=${1033-English} "Installation Type" "Custom Type"
-  VIAddVersionKey /LANG=${1033-English} "Installer Engine" "ZHOUXIAOBO_SYSTEMCLEAN_ALPHAEDITION_Standard.exe"
-  VIAddVersionKey /LANG=${1033-English} "Installer Version" "2.0.2012.62"
-  VIAddVersionKey /LANG=${1033-English} "周潇波" "原创制作：周潇波，由周潇波发布的软件绿色无毒、环保耐用！感谢您的安装！My Sina MicroBlog(@上海三五牌闹钟)：http://weibo.com/xiaobo58/  Personal Electronic Mail:zhouxiaobo.500@163.com 、zhouxiaobo500@hotmail.com"
-  VIAddVersionKey /LANG=${1033-English} "Package Type" "LZMA:26"
-  VIAddVersionKey /LANG=${1033-English} "Proc. Architecture" "x86&x64"
-  VIAddVersionKey /LANG=${1033-English} "Support Link" "@上海三五牌闹钟：http://weibo.com/xiaobo58/ "  
-  VIAddVersionKey /LANG=${1033-English} "SetupDigitalSign" "SYSTEMCLEANHELPER(STDEDITION)[2012SPECIALEDITION]_V2.0.2012.62"
+  	!define MUI_ABORTWARNING
+  	!define MUI_WELCOMEFINISHPAGE_BITMAP "R\A.bmp"
+  	!define MUI_WELCOMEFINISHPAGE_BITMAP_NOSTRETCH
+  	!define MUI_HEADERIMAGE
+  	!define MUI_HEADERIMAGE_BITMAP "R\B.bmp" 
+	/*!define MUI_COMPONENTSPAGE_SMALLDESC */
+  	!define MUI_WELCOMEPAGE_TEXT "使用此软件可快速安全删除系统中的各类系统垃圾。\r\n\r\n此软件简单易用 。拥有多方位的清理方式，特别当今适合各行各业的电脑工作人员，可用于当今主流的各类桌面版 Windows 32 或 64 位操作系统。\r\n\r\n制作：周潇波 日期：2012年02月，祝大家新年快乐！\r\n\r\n注意：此版本为RC版，作者可允许您在大范围内公共使用，非常感谢您使用本软件！！"
+  	!insertmacro MUI_PAGE_WELCOME
+  	!insertmacro MUI_PAGE_COMPONENTS
+	!insertmacro MUI_PAGE_INSTFILES
+  	!insertmacro MUI_LANGUAGE "SimpChinese"
+  	VIProductVersion "2.0.2012.62"
+  	VIAddVersionKey /LANG=${1033-English} "ProductName" "Windows 系统清理工具 2012龙年特别版 正式标准版"
+  	VIAddVersionKey /LANG=${1033-English} "Comments" "制作：周潇波 2012年01月22日 星期日 农历2011年大年三十 18:00 (GMT+8) E－Mail:zhouxiaobo.500@163.com 祝大家楼年吉祥，幸福安康！"
+	VIAddVersionKey /LANG=${1033-English} "CompanyName" "周潇波"
+  	VIAddVersionKey /LANG=${1033-English} "LegalTrademarks" "Windows 系统清理工具 正式标准版"
+  	VIAddVersionKey /LANG=${1033-English} "LegalCopyright" "Copyright (C) 2009-2012 by 周潇波"
+  	VIAddVersionKey /LANG=${1033-English} "FileDescription" "简单快速的系统清理工具，包含各类系统、软件清理、瘦身等功能。"
+  	VIAddVersionKey /LANG=${1033-English} "FileVersion" "2.0.2012.62"
+  	VIAddVersionKey /LANG=${1033-English} "Applies to" "Microsoft(R) Windows (R) 2000 Or Higher System."
+  	VIAddVersionKey /LANG=${1033-English} "Build Date " "2012/01/22 Sun 18:00 PM (GMT+8)"
+  	VIAddVersionKey /LANG=${1033-English} "Installation Type" "Custom Type"
+  	VIAddVersionKey /LANG=${1033-English} "Installer Engine" "ZHOUXIAOBO_SYSTEMCLEAN_ALPHAEDITION_Standard.exe"
+  	VIAddVersionKey /LANG=${1033-English} "Installer Version" "2.0.2012.62"
+  	VIAddVersionKey /LANG=${1033-English} "周潇波" "原创制作：周潇波，由周潇波发布的软件绿色无毒、环保耐用！感谢您的安装！My Sina MicroBlog(@上海三五牌闹钟)：http://weibo.com/xiaobo58/  Personal Electronic Mail:zhouxiaobo.500@163.com 、zhouxiaobo500@hotmail.com"
+  	VIAddVersionKey /LANG=${1033-English} "Package Type" "LZMA:26"
+  	VIAddVersionKey /LANG=${1033-English} "Proc. Architecture" "x86&x64"
+  	VIAddVersionKey /LANG=${1033-English} "Support Link" "@上海三五牌闹钟：http://weibo.com/xiaobo58/ "  
+  	VIAddVersionKey /LANG=${1033-English} "SetupDigitalSign" "SYSTEMCLEANHELPER(STDEDITION)[2012SPECIALEDITION]_V2.0.2012.62"
   
-  Function .onInit
-	Call GetWindowsVersion
-	Pop $R0
-	StrCmp $R0 "95" 0 +3
+	Function .onInit
+		Call GetWindowsVersion
+		Pop $R0
+		StrCmp $R0 "95" 0 +3
 		MessageBox MB_OK "对不起，您使用的系统在现在相当冷门。由于您的系统的特殊性，我们无法对您的系统进行相关清理工作。请您谅解！$\n推荐您的使用更加新的电脑及系统以及时跟上时代的步伐。请您注意：现在并没有过多的软件支持您的系统，这将会使您的电脑操作变得困难并且缺乏更高的安全性。 您可以通过以下三种方式联系作者周潇波$\n1、使用新浪微博 @上海三五牌闹钟.http://weibo.com/xiaobo58/$\n2、您可以在百度知道中向zhouxiaobo500求助。$\n3、直接给周潇波发伊妹儿：zhouxiaobo.500@163.com 或 zhouxiaobo500@hotmail.com$\n$\n非常期待您及时的反馈，谢谢！！"
 		Abort
-	StrCmp $R0 "98" 0 +3
+		StrCmp $R0 "98" 0 +3
 		MessageBox MB_OK "对不起，您使用的系统在现在相当冷门。由于您的系统的特殊性，我们无法对您的系统进行相关清理工作。请您谅解！$\n推荐您的使用更加新的电脑及系统以及时跟上时代的步伐。请您注意：现在并没有过多的软件支持您的系统，这将会使您的电脑操作变得困难并且缺乏更高的安全性。 您可以通过以下三种方式联系作者周潇波$\n1、使用新浪微博 @上海三五牌闹钟.http://weibo.com/xiaobo58/$\n2、您可以在百度知道中向zhouxiaobo500求助。$\n3、直接给周潇波发伊妹儿：zhouxiaobo.500@163.com 或 zhouxiaobo500@hotmail.com$\n$\n非常期待您及时的反馈，谢谢！！"
 		Abort
-	StrCmp $R0 "ME" 0 +3
+		StrCmp $R0 "ME" 0 +3
 		MessageBox MB_OK "对不起，您使用的系统在现在相当冷门。由于您的系统的特殊性，我们无法对您的系统进行相关清理工作。请您谅解！$\n推荐您的使用更加新的电脑及系统以及时跟上时代的步伐。请您注意：现在并没有过多的软件支持您的系统，这将会使您的电脑操作变得困难并且缺乏更高的安全性。 您可以通过以下三种方式联系作者周潇波$\n1、使用新浪微博 @上海三五牌闹钟.http://weibo.com/xiaobo58/$\n2、您可以在百度知道中向zhouxiaobo500求助。$\n3、直接给周潇波发伊妹儿：zhouxiaobo.500@163.com 或 zhouxiaobo500@hotmail.com$\n$\n非常期待您及时的反馈，谢谢！！"
 		Abort
-  InitPluginsDir   
-  System::Call 'kernel32::CreateMutexA(i 0, i 0, t "nsis_chs_installer") i .r1 ?e'
-  Pop $R0
-  StrCmp $R0 0 +3
-    MessageBox MB_OK|MB_ICONEXCLAMATION "另一个与本程序类似的软件正在运行中，请您稍后再拨！！"
-    Abort
-  FunctionEnd
-  
-/*Section ""  CLEAN
-SectionEnd*/
+		InitPluginsDir   
+  		System::Call 'kernel32::CreateMutexA(i 0, i 0, t "nsis_chs_installer") i .r1 ?e'
+		Pop $R0
+		StrCmp $R0 0 +3
+    		MessageBox MB_OK|MB_ICONEXCLAMATION "另一个与本程序类似的软件正在运行中，请您稍后再拨！！"
+    		Abort
+  	FunctionEnd
+		/*Section ""  CLEAN
+		SectionEnd*/
 
 SectionGroup "系统一般清理" NOR
-Section "!基础删除" STANDARDCLEAN
-  SectionIn RO
-  SetDetailsPrint textonly
-  DetailPrint "好好清理，天天向上！......"
-  SetDetailsPrint listonly
-  Delete $TEMP\*.*
+	Section "!基础删除" STANDARDCLEAN
+	SectionIn RO
+  		SetDetailsPrint textonly
+  		DetailPrint "好好清理，天天向上！......"
+  		SetDetailsPrint listonly
+  		Delete $TEMP\*.*
 		RMDir /r "$TEMP"
 		Delete $WINDIR\TEMP\*.*
   		Delete $APPDATA\Local\Temp\*.*																						/*以下项目在WIN7环境下加入，仅能供 Vista/7系统进行清理。*/
@@ -184,216 +183,205 @@ SectionGroup "系统高级清理" HIGHCLASS
 		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.flac"
 		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.mmf"
 		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.exe"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.rm"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.rmvb"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.dll"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.dll"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.flv"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.f4v"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.ini"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.jpg"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.nsi"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.ppt"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.txt"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.zip"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.avi"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.jpeg"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.gif"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.tif"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.c"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.h"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.txt"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.doc"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.docx"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.pptx"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.htm"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.html"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.asp"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.aspx"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.php"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.png"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.inf"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.dat"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.ico"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.url"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.bmp"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.nsh"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.f"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.for"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.f90"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.f95"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.f2k"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.tex"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.sql"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.nfo"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.mak"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.rc"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.as"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.mx"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.vb"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.vbs"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.js"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.sh"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.bsh"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.lua"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.pl"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.pm"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.py"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.mhtml"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.phtml"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.jsp"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.css"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.xml"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.config"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.java"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.cs"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.pas"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.inc"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.log"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.hpp"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.hxx"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.cpp"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.cxx"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.cc"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.m"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.java"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.cs"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.pas"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.inc"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\Folder"
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\Folder"
-    DeleteRegKey HKCU "Software\FlySky\E\Recent File List"																/*以下七项为新加入Masientwthtwe*/
-    DeleteRegKey HKCU "Software\Macromedia\FlashPlayer"
-    DeleteRegKey HKCU "Software\KCP Technologies, Inc.\几何画板\Recent File List"
-    DeleteRegKey HKCU "Software\Adobe\MediaBrowser\MRU\Photoshop\FileList"
-    DeleteRegKey HKCU "Software\FlySky\E\Recent File List"
-    DeleteRegKey HKCU "Software\GoldWave\GoldWave\Recent Files"
-	Delete	"C:\Users\周潇波\AppData\Local\CrashDumps"
-SectionEnd
-Section /o "Windows 画图及写字板历史记录"  PAINTCLEAN
-  DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Applets\Paint\Recent File List"
-  DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Applets\Wordpad\Recent File List"
-SectionEnd
-Section /o "Windows 预读、日志、内存转储、软件（系统）调试开始菜单等文件"  MEMCLEAN
-  Delete $WINDIR\Prefetch\*.db
-  Delete $WINDIR\Prefetch\*.pf
-  Delete $WINDIR\Prefetch\*.*
-  Delete $WINDIR\Minidump\*.dmp
-  Delete $WINDIR\Minidump\*.*
-  Delete $WINDIR\PFRO.LOG
-  Delete $WINDIR\setupact.log
-  Delete $WINDIR\setuperr.log
-  Delete $WINDIR\WindowsUpdate.log
-  Delete $WINDIR\WmFirewall.log
-  Delete $WINDIR\Logs\*.*
-  Delete $WINDIR\debug\*.*
-  RMDir /r "$WINDIR\Logs"
-  RMDir /r "$WINDIR\debug"
-  Delete $WINDIR\Microsoft.NET\Framework\v2.0.50727\ngen_service.log
-  Delete $WINDIR\Microsoft.NET\Framework\v4.0.30319\ngen.log
-  Delete $WINDIR\Microsoft.NET\Framework\v4.0.30319\ngen_service.log
-  SetOutPath "$WINDIR\Logs"
-  SetOutPath "$WINDIR\debug"
-  RMDir /r "$APPDATA\Local\CrashDumps"
-  DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\MenuOrder\Start Menu2\Programs\光影魔术手"
-  DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\MenuOrder\Start Menu2\Programs\AVG 2012"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.rm"
+		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.rmvb"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.dll"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.dll"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.flv"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.f4v"
+		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.ini"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.jpg"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.nsi"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.ppt"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.txt"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.zip"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.avi"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.jpeg"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.gif"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.tif"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.c"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.h"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.txt"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.doc"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.docx"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.pptx"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.htm"
+		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.html"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.asp"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.aspx"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.php"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.png"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.inf"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.dat"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.ico"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.url"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.bmp"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.nsh"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.f"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.for"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.f90"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.f95"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.f2k"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.tex"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.sql"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.nfo"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.mak"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.rc"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.as"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.mx"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.vb"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.vbs"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.js"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.sh"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.bsh"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.lua"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.pl"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.pm"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.py"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.mhtml"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.phtml"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.jsp"
+		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.css"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.xml"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.config"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.java"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.cs"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.pas"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.inc"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.log"
+		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.hpp"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.hxx"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.cpp"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.cxx"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.cc"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.m"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.java"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.cs"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.pas"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.inc"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\Folder"
+    		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\Folder"
+    		DeleteRegKey HKCU "Software\FlySky\E\Recent File List"																/*以下七项为新加入Masientwthtwe*/
+    		DeleteRegKey HKCU "Software\Macromedia\FlashPlayer"
+    		DeleteRegKey HKCU "Software\KCP Technologies, Inc.\几何画板\Recent File List"
+    		DeleteRegKey HKCU "Software\Adobe\MediaBrowser\MRU\Photoshop\FileList"
+    		DeleteRegKey HKCU "Software\FlySky\E\Recent File List"
+    		DeleteRegKey HKCU "Software\GoldWave\GoldWave\Recent Files"
+		Delete	"C:\Users\周潇波\AppData\Local\CrashDumps"
+	SectionEnd
+	
+	Section /o "Windows 画图及写字板历史记录"  PAINTCLEAN
+  		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Applets\Paint\Recent File List"
+  		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Applets\Wordpad\Recent File List"
+	SectionEnd
+	
+	Section /o "Windows 预读、日志、内存转储、软件（系统）调试开始菜单等文件"  MEMCLEAN
+  		Delete $WINDIR\Prefetch\*.db
+  		Delete $WINDIR\Prefetch\*.pf
+  		Delete $WINDIR\Prefetch\*.*
+  		Delete $WINDIR\Minidump\*.dmp
+  		Delete $WINDIR\Minidump\*.*
+  		Delete $WINDIR\PFRO.LOG
+  		Delete $WINDIR\setupact.log
+		Delete $WINDIR\setuperr.log
+  		Delete $WINDIR\WindowsUpdate.log
+  		Delete $WINDIR\WmFirewall.log
+  		Delete $WINDIR\Logs\*.*
+  		Delete $WINDIR\debug\*.*
+  		RMDir /r "$WINDIR\Logs"
+  		RMDir /r "$WINDIR\debug"
+  		Delete $WINDIR\Microsoft.NET\Framework\v2.0.50727\ngen_service.log
+  		Delete $WINDIR\Microsoft.NET\Framework\v4.0.30319\ngen.log
+  		Delete $WINDIR\Microsoft.NET\Framework\v4.0.30319\ngen_service.log
+  		SetOutPath "$WINDIR\Logs"
+  		SetOutPath "$WINDIR\debug"
+  		RMDir /r "$APPDATA\Local\CrashDumps"
+  		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\MenuOrder\Start Menu2\Programs\光影魔术手"
+  		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\MenuOrder\Start Menu2\Programs\AVG 2012"
   
-SectionEnd
-Section "Windows 缩略图缓存"  PICCLEAN
-  Delete $APPDATA\Local\Microsoft\Windows\Explorer\*.*
-  RMDir /r "$APPDATA\Local\Microsoft\Windows\Explorer"
-SectionEnd
+	SectionEnd
+
+	Section "Windows 缩略图缓存"  PICCLEAN
+		Delete $APPDATA\Local\Microsoft\Windows\Explorer\*.*
+  		RMDir /r "$APPDATA\Local\Microsoft\Windows\Explorer"
+	SectionEnd
 
 
-Section "Windows 错误报告"  ERRORLOGCLEAN   
-  Delete $APPDATA\AppData\Local\Microsoft\Windows\WER\*.*
-  RMDir /r "$APPDATA\AppData\Local\Microsoft\Windows\WER"
-SectionEnd
-Section "Windows 自动更新缓存"  AUPDATECLEAN
-  Delete $WINDIR\SoftwareDistribution\Download\*.*
-  RMDir /r "$WINDIR\SoftwareDistribution\Download"
-SectionEnd
-Section "其它类型清理(包括回收站)"  HIGHCLEAN
-    RMDir /r "A:\Recycler"
-    RMDir /r "B:\Recycler"
-    RMDir /r "C:\Recycler"
-    RMDir /r "D:\Recycler"
-    RMDir /r "E:\Recycler"
-    RMDir /r "F:\Recycler"
-    RMDir /r "G:\Recycler"
-    RMDir /r "H:\Recycler"
-    RMDir /r "I:\Recycler"
-    RMDir /r "J:\Recycler"
-    RMDir /r "K:\Recycler"
-    RMDir /r "L:\Recycler"
-    RMDir /r "M:\Recycler"
-    RMDir /r "N:\Recycler"
-    RMDir /r "O:\Recycler"
-    RMDir /r "P:\Recycler"
-    RMDir /r "Q:\Recycler"
-    RMDir /r "R:\Recycler"
-    RMDir /r "S:\Recycler"
-    RMDir /r "T:\Recycler"
-    RMDir /r "U:\Recycler"
-    RMDir /r "V:\Recycler"
-    RMDir /r "W:\Recycler"
-    RMDir /r "X:\Recycler"
-    RMDir /r "Y:\Recycler"
-    RMDir /r "Z:\Recycler"
-    RMDir /r "C:\PerfLogs\System\Diagnostics"
-    RMDir /r "D:\PerfLogs\System\Diagnostics"
-    RMDir /r "E:\PerfLogs\System\Diagnostics"
-    RMDir /r "F:\PerfLogs\System\Diagnostics"
-    RMDir /r "G:\PerfLogs\System\Diagnostics"
-    RMDir /r "H:\PerfLogs\System\Diagnostics"
-SectionEnd
+	Section "Windows 错误报告"  ERRORLOGCLEAN   
+  		Delete $APPDATA\AppData\Local\Microsoft\Windows\WER\*.*
+  		RMDir /r "$APPDATA\AppData\Local\Microsoft\Windows\WER"
+	SectionEnd
+	
+	Section "Windows 自动更新缓存"  AUPDATECLEAN
+  		Delete $WINDIR\SoftwareDistribution\Download\*.*
+  		RMDir /r "$WINDIR\SoftwareDistribution\Download"
+	SectionEnd
+	
+	Section "其它类型清理(包括回收站)"  HIGHCLEAN
+  		/*  RMDir /r "A:\Recycler"
+    		RMDir /r "B:\Recycler"
+    		RMDir /r "C:\Recycler"
+    		RMDir /r "E:\PerfLogs\System\Diagnostics"
+    		RMDir /r "F:\PerfLogs\System\Diagnostics"
+    		RMDir /r "G:\PerfLogs\System\Diagnostics"
+    		RMDir /r "H:\PerfLogs\System\Diagnostics"  2014.4.9.更新：怎么想都不会这么清空回收站吧，以前写的代码略坑。*/
+	SectionEnd
 SectionGroupEnd
 
 SectionGroup "浏览器清理" BR
-Section /o "!IE浏览器"  IECLEAN
-/*rundll32.exe C:\Windows\system32\inetcpl.cpl,ClearMyTracksByProcess Flags:8395 WinX:160 WinY:147 IEFrame:00000000 ExecShell "open" "$WINDIR\System32\inetcpl.cpl"*/
-  Delete $INTERNET_CACHE\Content.IE5\*.*
-  Delete $INTERNET_CACHE\*.*
-  RMDir /r "$INTERNET_CACHE\Content.IE5"
-  RMDir /r "$INTERNET_CACHE"
-  DeleteRegKey HKCU "Software\Microsoft\Internet Explorer\TypedURLs"
-  Delete $HISTORY\*.*
-  RMDir /r "$HISTORY"
-  /*Delete $APPDATA\AppData\Local\Microsoft\Internet Explorer\brndlog.bak*/
-SectionEnd
-Section /o "!IE浏览器的 Cookies"  IECOOK
-  Delete $COOKIES\*.*
-  RMDir /r "$COOKIES"
-SectionEnd
-Section /o "Mozilla Firefox浏览器"  FOXCLEAN
-  Delete $APPDATA\Mozilla\Firefox\Profiles\*.*
-  RMDir /r "$APPDATA\Mozilla\Firefox\Profiles"
-SectionEnd
+	Section /o "!IE浏览器"  IECLEAN
+		/*rundll32.exe C:\Windows\system32\inetcpl.cpl,ClearMyTracksByProcess Flags:8395 WinX:160 WinY:147 IEFrame:00000000 ExecShell "open" "$WINDIR\System32\inetcpl.cpl"*/
+  		Delete $INTERNET_CACHE\Content.IE5\*.*
+  		Delete $INTERNET_CACHE\*.*
+  		RMDir /r "$INTERNET_CACHE\Content.IE5"
+  		RMDir /r "$INTERNET_CACHE"
+  		DeleteRegKey HKCU "Software\Microsoft\Internet Explorer\TypedURLs"
+  		Delete $HISTORY\*.*
+  		RMDir /r "$HISTORY"
+  		/*Delete $APPDATA\AppData\Local\Microsoft\Internet Explorer\brndlog.bak*/
+	SectionEnd
+	
+	Section /o "!IE浏览器的 Cookies"  IECOOK
+  		Delete $COOKIES\*.*
+  		RMDir /r "$COOKIES"
+	SectionEnd
+	
+	Section /o "Mozilla Firefox浏览器"  FOXCLEAN
+  		Delete $APPDATA\Mozilla\Firefox\Profiles\*.*
+  		RMDir /r "$APPDATA\Mozilla\Firefox\Profiles"
+	SectionEnd
 SectionGroupEnd
+
 SectionGroup "系统深度瘦身" THINPC
-Section "!系统驱动备份"  DRIVERCLEAN
- Delete "$WINDIR\Driver Cache\*.*"
- RMDir /r "$WINDIR\Driver Cache"
-SectionEnd
-Section /o "仓颉输入法"  CANGJIECLEAN
- RMDir /r $WINDIR\IME\CINTLGNT
- RMDir /r $WINDIR\System32\IME\CINTLGNT
-SectionEnd
-Section /o "韩文输入法"  HANCLEAN
- RMDir /r $WINDIR\IME\imekr8
- RMDir /r $WINDIR\System32\IME\imekr8
-SectionEnd
-Section /o "!日文输入法"  JANCLEAN
- RMDir /r $WINDIR\IME\IMEJP10
- RMDir /r $WINDIR\System32\IME\IMEJP10
-SectionEnd
-Section /o "可删除的窗体外观及鼠标指针方案"  CHUANGTICLEAN
-  DeleteRegKey HKCU "Control Panel\Appearance\Schemes"
-  DeleteRegKey HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Control Panel\Cursors\Schemes"
-SectionEnd
-Section /o "可删除的他国语言"  LANGUAGECLEAN
-  DeleteRegKey HKLM "SYSTEM\CurrentControlSet\Control\Nls\Locale"
-SectionEnd
+	Section "!系统驱动备份"  DRIVERCLEAN
+		Delete "$WINDIR\Driver Cache\*.*"
+ 		RMDir /r "$WINDIR\Driver Cache"
+	SectionEnd
+	
+	Section /o "仓颉输入法"  CANGJIECLEAN
+ 		RMDir /r $WINDIR\IME\CINTLGNT
+ 		RMDir /r $WINDIR\System32\IME\CINTLGNT
+	SectionEnd
+	
+	Section /o "韩文输入法"  HANCLEAN
+ 		RMDir /r $WINDIR\IME\imekr8
+ 		RMDir /r $WINDIR\System32\IME\imekr8
+	SectionEnd
+	
+	Section /o "!日文输入法"  JANCLEAN
+ 		RMDir /r $WINDIR\IME\IMEJP10
+ 		RMDir /r $WINDIR\System32\IME\IMEJP10
+	SectionEnd
+
+	Section /o "可删除的窗体外观及鼠标指针方案"  CHUANGTICLEAN
+  		DeleteRegKey HKCU "Control Panel\Appearance\Schemes"
+  		DeleteRegKey HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Control Panel\Cursors\Schemes"
+	SectionEnd
+
+	Section /o "可删除的他国语言"  LANGUAGECLEAN
+  		DeleteRegKey HKLM "SYSTEM\CurrentControlSet\Control\Nls\Locale"
+	SectionEnd
+
 Section /o "可删除的他国时区"  TIMEZONECLEAN
   DeleteRegKey HKLM "SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Afghanistan Standard Time"
   DeleteRegKey HKLM "SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Alaskan Standard Time"
