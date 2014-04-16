@@ -1,38 +1,38 @@
 /*制作	周潇波
 日期	2012年01月*/
-!define					PRODUCT_NAME "Windows 系统清理工具 正式标准版"
-!define 				PRODUCT_VERSION "2.0.2012.62"
-!define 				PRODUCT_PUBLISHER "制作：周潇波"
-!define					PRODUCT_WEB_SITE "http://weibo.com/xiaobo58/"
-!define 				APPWEBSITE "http://weibo.com/xiaobo58/"
-!define 				MUI_ICON "E:\DisplayIcon.ICO"
-!define 				VERSION_MAJOR 2
-!define		 			VERSION_MINOR 0201262
-!define 				MUI_ABORTWARNING_TEXT "您是否要取消操作？？"
-!define					MUI_TEXT_COMPONENTS_TITLE "选择清理项目"
-!define					MUI_TEXT_COMPONENTS_SUBTITLE "请仔细选择您想要清理的项目，程序已经默认为您选择了几个常用的项目，您可以自行任意勾选。"
-!define					MUI_INNERTEXT_COMPONENTS_DESCRIPTION_TITLE "清理项目详细介绍"
-!define					MUI_INNERTEXT_COMPONENTS_DESCRIPTION_INFO "请将您的鼠标移至您想要清理的项目之上，您将会看到所清理项目的详细提示信息。"
-!define					MUI_TEXT_INSTALLING_TITLE "清理中，忙呢"
-!define 				MUI_TEXT_INSTALLING_SUBTITLE "正在为您清理您的系统，请稍等片刻...^_^..."
-!define					MUI_TEXT_FINISH_TITLE "您所选择的清理项已成功清理完毕"
-!define					MUI_TEXT_FINISH_SUBTITLE "OK!!清理好啦，您又有了一个干净的系统了！"
-!define					MUI_TEXT_ABORT_TITLE "您所选择的清理项目竟然没有成功清理？？"
-!define					MUI_TEXT_ABORT_SUBTITLE "哎呀，没有清理成功嘞，请下仔细检查问题，如果还有疑问请 @上海三五牌闹钟（SinaMicroBlog）：http://weibo.com/xiaobo58/."
-!include				"MUI.nsh"
-!include				"x64.nsh"
-!include				"Sections.nsh"
-InstallDir				"C:\"
-OutFile					"CleanV2RC_STD.exe"  
-Caption 				"Windows 系统清理工具 RC测试版"
-Name 					"Windows 系统清理工具 RC测试版"
-RequestExecutionLevel 			admin
-XPStyle					on
-WindowIcon				off
-ShowInstDetails				show
-SetCompressor /SOLID			lzma
-SetCompressorDictSize			64
-SetDatablockOptimize			on
+!define				PRODUCT_NAME "Windows 系统清理工具 正式标准版"
+!define 			PRODUCT_VERSION "2.0.2012.62"
+!define 			PRODUCT_PUBLISHER "制作：周潇波"
+!define				PRODUCT_WEB_SITE "http://weibo.com/xiaobo58/"
+!define 			APPWEBSITE "http://weibo.com/xiaobo58/"
+!define 			MUI_ICON "E:\DisplayIcon.ICO"
+!define 			VERSION_MAJOR 2
+!define		 		VERSION_MINOR 0201262
+!define 			MUI_ABORTWARNING_TEXT "您是否要取消操作？？"
+!define				MUI_TEXT_COMPONENTS_TITLE "选择清理项目"
+!define				MUI_TEXT_COMPONENTS_SUBTITLE "请仔细选择您想要清理的项目，程序已经默认为您选择了几个常用的项目，您可以自行任意勾选。"
+!define				MUI_INNERTEXT_COMPONENTS_DESCRIPTION_TITLE "清理项目详细介绍"
+!define				MUI_INNERTEXT_COMPONENTS_DESCRIPTION_INFO "请将您的鼠标移至您想要清理的项目之上，您将会看到所清理项目的详细提示信息。"
+!define				MUI_TEXT_INSTALLING_TITLE "清理中，忙呢"
+!define 			MUI_TEXT_INSTALLING_SUBTITLE "正在为您清理您的系统，请稍等片刻...^_^..."
+!define				MUI_TEXT_FINISH_TITLE "您所选择的清理项已成功清理完毕"
+!define				MUI_TEXT_FINISH_SUBTITLE "OK!!清理好啦，您又有了一个干净的系统了！"
+!define				MUI_TEXT_ABORT_TITLE "您所选择的清理项目竟然没有成功清理？？"
+!define				MUI_TEXT_ABORT_SUBTITLE "哎呀，没有清理成功嘞，请下仔细检查问题，如果还有疑问请 @上海三五牌闹钟（SinaMicroBlog）：http://weibo.com/xiaobo58/."
+!include			"MUI.nsh"
+!include			"x64.nsh"
+!include			"Sections.nsh"
+InstallDir			"C:\"
+OutFile				"CleanV2RC_STD.exe"  
+Caption 			"Windows 系统清理工具 RC测试版"
+Name 				"Windows 系统清理工具 RC测试版"
+RequestExecutionLevel 		admin
+XPStyle				on
+WindowIcon			off
+ShowInstDetails			show
+SetCompressor /SOLID		lzma
+SetCompressorDictSize		64
+SetDatablockOptimize		on
 
 	/*Function GetWindowsVersion
 		Push $R0
