@@ -5,7 +5,7 @@
 !define 			PRODUCT_PUBLISHER "制作：周潇波"
 !define				PRODUCT_WEB_SITE "http://weibo.com/xiaobo58/"
 !define 			APPWEBSITE "http://weibo.com/xiaobo58/"
-!define 			MUI_ICON "E:\DisplayIcon.ICO"
+!define 			MUI_ICON "DisplayIcon.ICO"
 !define 			VERSION_MAJOR 2
 !define		 		VERSION_MINOR 0201262
 !define 			MUI_ABORTWARNING_TEXT "您是否要取消操作？？"
