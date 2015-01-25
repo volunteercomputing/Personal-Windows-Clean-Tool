@@ -1,5 +1,9 @@
 /*制作	周潇波
-日期	2012年01月*/
+日期	2012年01月
+This code was then emerged to Github.
+Final update date: 2015.01.25
+*/
+
 !define				PRODUCT_NAME "Windows 系统清理工具 正式标准版"
 !define 			PRODUCT_VERSION "2.0.2012.62"
 !define 			PRODUCT_PUBLISHER "制作：周潇波"
@@ -175,7 +179,7 @@ SectionGroup "系统高级清理" HIGHCLASS
   		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\LastVisitedPidlMRU"
   		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\CIDSizeMRU"
   		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\StreamMRU"
-		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist"										/*以下几项在 WINXP 环境内加入*/
+		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist"						/*以下几项在 WINXP 环境内加入*/
   		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\TrayNotify"
   		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Applets\Wordpad\Recent File List"
   		DeleteRegKey HKCU "Software\Microsoft\Windows\ShellNoRoam\MUICache"
@@ -261,7 +265,7 @@ SectionGroup "系统高级清理" HIGHCLASS
     		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.inc"
     		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\Folder"
     		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\Folder"
-    		DeleteRegKey HKCU "Software\FlySky\E\Recent File List"																/*以下七项为新加入Masientwthtwe*/
+    		DeleteRegKey HKCU "Software\FlySky\E\Recent File List"									/*以下七项为新加入Masientwthtwe*/
     		DeleteRegKey HKCU "Software\Macromedia\FlashPlayer"
     		DeleteRegKey HKCU "Software\KCP Technologies, Inc.\几何画板\Recent File List"
     		DeleteRegKey HKCU "Software\Adobe\MediaBrowser\MRU\Photoshop\FileList"
@@ -473,7 +477,7 @@ SectionGroup "系统深度瘦身" THINPC
   		DeleteRegKey HKLM "SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\West Asia Standard Time"
   		DeleteRegKey HKLM "SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\West Pacific Standard Time"
   		DeleteRegKey HKLM "SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Yakutsk Standard Time"
-  		DeleteRegKey HKLM "SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Bahia Standard Time"							/*在WINXP环境下加入*/
+  		DeleteRegKey HKLM "SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Bahia Standard Time"						/*在WINXP环境下加入*/
   		DeleteRegKey HKLM "SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Kaliningrad Standard Time"
   		DeleteRegKey HKLM "SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Mexico Standard Time"
   		DeleteRegKey HKLM "SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones\Mexico Standard Time 2"
@@ -759,34 +763,34 @@ SectionGroup "常用软件清理" SOFTCLEAN
 	SectionEnd
 SectionGroupEnd
 
-  LangString 	  	DESC_NOR				${LANG_SimpChinese}			"系统垃圾的一般清理工作，必须的！"
-  LangString 	  	DESC_SOFTFILECLEAN			${LANG_SimpChinese}			"清理对于一些常用软件打开文件的历史记录、使用记录等等。定期清理可保护个人数据内容。"
-  LangString 	  	DESC_SOFTCLEAN				${LANG_SimpChinese}			"系统安装的常用软件的清理工作，同样包括清理金山卫士下载补丁的临时文件（需要安装在默认目录）。定期清理可保护个人数据内容。"
-  LangString 	  	DESC_DRIVERCLEAN			${LANG_SimpChinese}			"清理系统自带的驱动程序，删除后可能会造成某些驱动无法加载。"
-  LangString 	  	DESC_FLASHCLEAN				${LANG_SimpChinese}			"清理浏览 Flash Player 的历史记录以及保存在系统内的 Flash 程序或游戏的进度、缓存等等。"
-  LangString 	  	DESC_HIGHCLEAN				${LANG_SimpChinese}			"对于清理系统回收站(请三思而后行、且有些文件不能删除的请您手工删除)以及其它散落在各地的垃圾文件清理，皆可安全删除！"
-  LangString 	 	DESC_STANDARDCLEAN			${LANG_SimpChinese} 			"清理有关系统的临时文件。"
-  LangString 	 	DESC_THINPC				${LANG_SimpChinese}			"针对于 Windows 系统的深层瘦身。包括一些冷门、无用的系统功能。"
-  LangString		DESC_BR					${LANG_SimpChinese}			"浏览器的完整痕迹清除。包括缓存、历史记录"
-  LangString  		DESC_OFFICESOFTCLEAN			${LANG_SimpChinese}			"清理 Microsoft Office 系列软件的打开文件历史记录。对于办公室工作人员，建议定期清理。"
-  LangString  		DESC_IECLEAN				${LANG_SimpChinese}			"清理 IE 浏览器的浏览记录。不包含 Cookies[一种文本文档，用于方便用户无需输入用户名及密码快速登录网站。因此容易产生安全问题。]"
-  LangString  		DESC_IECook				${LANG_SimpChinese}			"清理 IE 浏览器的浏览 Cookies。"
-  LangString  		DESC_PICCLEAN				${LANG_SimpChinese}			"Windows 缩略图缓存可以加快浏览图片时的速度。如果您不进行定期清理的话，它可以大量占用磁盘空间。定期清理可释放系统空间！"
-  LangString  		DESC_ERRORLOGCLEAN			${LANG_SimpChinese}			"当某个程序出现了崩溃或非法操作时，系统会自动生成大量错误报告。定期清理可释放大量系统空间！"
-  LangString 		DESC_FOXCLEAN				${LANG_SimpChinese}			"清理 Mozilla Firefox 浏览器的浏览记录。"
-  LangString  		DESC_HIGHCLASS				${LANG_SimpChinese}			"系统内垃圾的更深一步清理，具有较好的信息保护功能。"
-  LangString  		DESC_RUNCLEAN				${LANG_SimpChinese}			"清理运行对话框内的输入命令历史记录。"
-  LangString   		DESC_RECENTCLEAN			${LANG_SimpChinese}			"清理系统中的文件、文件夹、历史记录；最近打开的各种常用程序、文件的历史记录"
-  LangString   		DESC_PAINTCLEAN				${LANG_SimpChinese}			"清理系统自带的画图及写字板软件中的历史记录。"
-  LangString  		DESC_MEMCLEAN				${LANG_SimpChinese}			"清理系统自动保存的预读、内存转储、系统日志、软件（系统）调试、开始菜单等文件及历史内容。定期清理可释放大量磁盘空间！"
-  LangString		DESC_CANGJIECLEAN			${LANG_SimpChinese}		 	"清理系统内自带的微软仓颉输入法（推荐删除，版本太久）"
-  LangString		DESC_HANCLEAN				${LANG_SimpChinese}			"清理系统内自带的微软韩文（朝鲜语）输入法。"
-  LangString		DESC_JANCLEAN				${LANG_SimpChinese}			"清理系统内自带的微软日文输入法。"
-  LangString		DESC_CHUANGTICLEAN			${LANG_SimpChinese}			"清理系统内可删除的窗体外观及鼠标指针方案（建议删除，内容无用）"
-  LangString		DESC_LANGUAGECLEAN			${LANG_SimpChinese}			"清理系统内可删除的他国语言（已保留系统必须的内容，如果您不浏览国外网站，可安全删除）"
-  LangString		DESC_TIMEZONECLEAN			${LANG_SimpChinese}			"清理系统内可删除的他国时区（已保留系统必须的内容，如果您不经常使用到国际时区，可安全删除）"
-  LangString		DESC_INTERNETCODECLEAN			${LANG_SimpChinese}			"清理系统内可删除的 Internet 国家和地区代码（已保留系统必须的内容，如果您不经常浏览国外网站，可安全删除）"
-  LangString		DESC_AUPDATECLEAN			${LANG_SimpChinese}			"Windows 在进行安装补丁更新时释放的缓存文件，定期清理可释放大量磁盘空间！"
+  LangString 	DESC_NOR			${LANG_SimpChinese}		"系统垃圾的一般清理工作，必须的！"
+  LangString 	DESC_SOFTFILECLEAN		${LANG_SimpChinese}		"清理对于一些常用软件打开文件的历史记录、使用记录等等。定期清理可保护个人数据内容。"
+  LangString	DESC_SOFTCLEAN			${LANG_SimpChinese}		"系统安装的常用软件的清理工作，同样包括清理金山卫士下载补丁的临时文件（需要安装在默认目录）。定期清理可保护个人数据内容。"
+  LangString	DESC_DRIVERCLEAN		${LANG_SimpChinese}		"清理系统自带的驱动程序，删除后可能会造成某些驱动无法加载。"
+  LangString	DESC_FLASHCLEAN			${LANG_SimpChinese}		"清理浏览 Flash Player 的历史记录以及保存在系统内的 Flash 程序或游戏的进度、缓存等等。"
+  LangString 	DESC_HIGHCLEAN			${LANG_SimpChinese}		"对于清理系统回收站(请三思而后行、且有些文件不能删除的请您手工删除)以及其它散落在各地的垃圾文件清理，皆可安全删除！"
+  LangString 	DESC_STANDARDCLEAN		${LANG_SimpChinese} 		"清理有关系统的临时文件。"
+  LangString 	DESC_THINPC			${LANG_SimpChinese}		"针对于 Windows 系统的深层瘦身。包括一些冷门、无用的系统功能。"
+  LangString	DESC_BR				${LANG_SimpChinese}		"浏览器的完整痕迹清除。包括缓存、历史记录"
+  LangString  	DESC_OFFICESOFTCLEAN		${LANG_SimpChinese}		"清理 Microsoft Office 系列软件的打开文件历史记录。对于办公室工作人员，建议定期清理。"
+  LangString  	DESC_IECLEAN			${LANG_SimpChinese}		"清理 IE 浏览器的浏览记录。不包含 Cookies[一种文本文档，用于方便用户无需输入用户名及密码快速登录网站。因此容易产生安全问题。]"
+  LangString  	DESC_IECook			${LANG_SimpChinese}		"清理 IE 浏览器的浏览 Cookies。"
+  LangString  	DESC_PICCLEAN			${LANG_SimpChinese}		"Windows 缩略图缓存可以加快浏览图片时的速度。如果您不进行定期清理的话，它可以大量占用磁盘空间。定期清理可释放系统空间！"
+  LangString  	DESC_ERRORLOGCLEAN		${LANG_SimpChinese}		"当某个程序出现了崩溃或非法操作时，系统会自动生成大量错误报告。定期清理可释放大量系统空间！"
+  LangString 	DESC_FOXCLEAN			${LANG_SimpChinese}		"清理 Mozilla Firefox 浏览器的浏览记录。"
+  LangString  	DESC_HIGHCLASS			${LANG_SimpChinese}		"系统内垃圾的更深一步清理，具有较好的信息保护功能。"
+  LangString  	DESC_RUNCLEAN			${LANG_SimpChinese}		"清理运行对话框内的输入命令历史记录。"
+  LangString   	DESC_RECENTCLEAN		${LANG_SimpChinese}		"清理系统中的文件、文件夹、历史记录；最近打开的各种常用程序、文件的历史记录"
+  LangString   	DESC_PAINTCLEAN			${LANG_SimpChinese}		"清理系统自带的画图及写字板软件中的历史记录。"
+  LangString  	DESC_MEMCLEAN			${LANG_SimpChinese}		"清理系统自动保存的预读、内存转储、系统日志、软件（系统）调试、开始菜单等文件及历史内容。定期清理可释放大量磁盘空间！"
+  LangString	DESC_CANGJIECLEAN		${LANG_SimpChinese}		"清理系统内自带的微软仓颉输入法（推荐删除，版本太久）"
+  LangString	DESC_HANCLEAN			${LANG_SimpChinese}		"清理系统内自带的微软韩文（朝鲜语）输入法。"
+  LangString	DESC_JANCLEAN			${LANG_SimpChinese}		"清理系统内自带的微软日文输入法。"
+  LangString	DESC_CHUANGTICLEAN		${LANG_SimpChinese}		"清理系统内可删除的窗体外观及鼠标指针方案（建议删除，内容无用）"
+  LangString	DESC_LANGUAGECLEAN		${LANG_SimpChinese}		"清理系统内可删除的他国语言（已保留系统必须的内容，如果您不浏览国外网站，可安全删除）"
+  LangString	DESC_TIMEZONECLEAN		${LANG_SimpChinese}		"清理系统内可删除的他国时区（已保留系统必须的内容，如果您不经常使用到国际时区，可安全删除）"
+  LangString	DESC_INTERNETCODECLEAN		${LANG_SimpChinese}		"清理系统内可删除的 Internet 国家和地区代码（已保留系统必须的内容，如果您不经常浏览国外网站，可安全删除）"
+  LangString	DESC_AUPDATECLEAN		${LANG_SimpChinese}		"Windows 在进行安装补丁更新时释放的缓存文件，定期清理可释放大量磁盘空间！"
   
   !insertmacro		MUI_FUNCTION_DESCRIPTION_BEGIN
   !insertmacro 		MUI_DESCRIPTION_TEXT			${NOR}					$(DESC_NOR)
